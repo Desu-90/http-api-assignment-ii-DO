@@ -5,6 +5,29 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
+    const handleResponse = async (response) => {
+    const content = document.getElementById('content');
+
+    let parsedResponse = JSON.parse(resText);
+    switch (response.status) {
+      case 200:
+        content.innerHTML = `Success`;
+        console.log(parsedResponse);
+        break;
+      case 201: 
+        content.innerHTML = `User added`;
+        console.log(parsedResponse);
+        break;
+      case 400: 
+        content.innerHTML = `Missing name, age or both`;
+        console.log(parsedResponse);
+        break;
+      case 404:
+        content.innerHTML = `<b>Not Found</b>`;
+        console.log(parsedResponse);
+        break;
+    }
+  }
 
   </script>
 </head>

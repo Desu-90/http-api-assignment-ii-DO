@@ -1,0 +1,24 @@
+{
+  "name": "http-api-assignment-ii-do",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Desu-90/http-api-assignment-ii-DO.git"
+  },
+  "author": "Dennis Olmedo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Desu-90/http-api-assignment-ii-DO/issues"
+  },
+  "homepage": "https://github.com/Desu-90/http-api-assignment-ii-DO#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
