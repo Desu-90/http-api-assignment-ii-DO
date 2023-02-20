@@ -1,39 +1,15 @@
-const http = require('http'); //pull in http module
-//url module for parsing url string
-const url = require('url'); 
-//querystring module for parsing querystrings from url
+const http = require('http'); // pull in http module
+// url module for parsing url string
+const url = require('url');
+// querystring module for parsing querystrings from url
 const query = require('querystring');
-//pull in our custom files
+// pull in our custom files
 const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const routes = {
-  'GET': {
-    '/': htmlHandler.getIndex,
-    '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
-    notReal: jsonHandler.notReal,
-  },
-  'HEAD': {
-    '/getUsers': jsonHandler.getUsersMeta,
-    notReal: jsonHandler.notRealMeta,
-  }
-}
-
-//handle POST requests
-const handlePost = (request, response, parsedUrl) => {
-  
-  //If they go to /addUser
-  if(parsedUrl.pathname === '/addUser') {
-    
-    parseBody(request, response, jsonHandler.addUser);
-  }
-};
-
 const parseBody = (request, response, handler) => {
-  
   const body = [];
 
   request.on('error', (err) => {
@@ -54,23 +30,28 @@ const parseBody = (request, response, handler) => {
   });
 };
 
-//handle GET requests
-const handleGet = (request, response, parsedUrl) => {
+// handle POST requests
+const handlePost = (request, response, parsedUrl) => {
+  // If they go to /addUser
+  if (parsedUrl.pathname === '/addUser') {
+    parseBody(request, response, jsonHandler.addUser);
+  }
+};
 
+// handle GET requests
+const handleGet = (request, response, parsedUrl) => {
   if (parsedUrl.pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
   } else if (parsedUrl.pathname === '/getUsers') {
     jsonHandler.getUsers(request, response);
-
-  } else {
+  } else if (parsedUrl.pathname === '/') {
     htmlHandler.getIndex(request, response);
+  } else {
+    jsonHandler.notReal(request, response);
   }
 };
 
-
-
 const onRequest = (request, response) => {
-
   const parsedUrl = url.parse(request.url);
 
   if (request.method === 'POST') {
